@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KB Browser</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+
+<body>
+
+<div class="browser">
+
+
+    <!-- ВКЛАДКИ -->
+
+    <div class="tabs">
+
+        <div id="tabsContainer"></div>
+
+        <button
+            class="new-tab"
+            id="newTab"
+            title="Новая вкладка"
+        >
+            +
+        </button>
+
+    </div>
+
+
+
+    <!-- ПАНЕЛЬ БРАУЗЕРА -->
+
+    <div class="toolbar">
+
+        <button
+            class="button"
+            id="back"
+            title="Назад"
+        >
+            ←
+        </button>
+
+
+        <button
+            class="button"
+            id="forward"
+            title="Вперёд"
+        >
+            →
+        </button>
+
+
+        <button
+            class="button"
+            id="reload"
+            title="Обновить"
+        >
+            ↻
+        </button>
+
+
+        <button
+            class="button"
+            id="home"
+            title="Домой"
+        >
+            ⌂
+        </button>
+
+
+        <div class="address-container">
+
+            <span id="security">
+                🔒
+            </span>
+
+            <input
+                id="address"
+                type="text"
+                placeholder="Введите адрес или поисковый запрос"
+                autocomplete="off"
+                spellcheck="false"
+            >
+
+        </div>
+
+
+        <button
+            class="button"
+            id="settings"
+            title="Настройки"
+        >
+            ⚙
+        </button>
+
+    </div>
+
+
+
+    <!-- ГЛАВНАЯ -->
+
+    <main id="homePage">
+
+        <div class="home-content">
+
+            <div class="logo">
+                KB
+            </div>
+
+
+            <div class="subtitle">
+                Твой браузер
+            </div>
+
+
+            <form id="searchForm">
+
+                <input
+                    id="search"
+                    class="search"
+                    type="text"
+                    placeholder="Поиск в интернете..."
+                    autocomplete="off"
+                >
+
+            </form>
+
+
+            <div class="shortcuts">
+
+                <button
+                    data-url="https://www.youtube.com"
+                >
+                    YouTube
+                </button>
+
+
+                <button
+                    data-url="https://github.com"
+                >
+                    GitHub
+                </button>
+
+
+                <button
+                    data-url="https://wikipedia.org"
+                >
+                    Wikipedia
+                </button>
+                <button
+                    data-url="https://mystat.itstep.by/"
+                >
+                    MyStat
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ПОИСК -->
+
+    <main
+        id="searchPage"
+        class="search-page"
+        style="display: none;"
+    >
+
+        <div class="search-page-content">
+
+
+            <div class="search-header">
+
+                <div class="search-logo">
+                    KB
+                </div>
+
+
+                <div class="search-brand">
+                    KB Search
+                </div>
+
+            </div>
+
+
+
+            <form id="resultsSearchForm">
+
+                <input
+                    id="resultsSearch"
+                    class="results-search"
+                    type="text"
+                    placeholder="Поиск в KB..."
+                    autocomplete="off"
+                >
+
+            </form>
+
+
+
+            <!-- КАТЕГОРИИ ПОИСКА -->
+
+            <div class="search-tabs">
+
+                <button
+                    class="search-tab active"
+                    data-category="general"
+                >
+                    Все
+                </button>
+
+
+                <button
+                    class="search-tab"
+                    data-category="images"
+                >
+                    Картинки
+                </button>
+
+
+                <button
+                    class="search-tab"
+                    data-category="videos"
+                >
+                    Видео
+                </button>
+
+
+                <button
+                    class="search-tab"
+                    data-category="news"
+                >
+                    Новости
+                </button>
+
+            </div>
+
+
+
+            <div class="search-divider"></div>
+
+
+
+            <div id="results"></div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ОКНО ПРОСМОТРА КАРТИНКИ -->
+
+    <div
+        id="imageViewer"
+        class="overlay"
+        style="display: none;"
+    >
+
+        <div class="image-viewer">
+
+            <button
+                id="closeImageViewer"
+                class="overlay-close"
+                title="Закрыть"
+            >
+                ×
+            </button>
+
+
+            <div class="image-viewer-content">
+
+                <img
+                    id="viewerImage"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+
+            <div class="image-viewer-actions">
+
+                <button id="saveImage">
+                    Сохранить как
+                </button>
+
+
+                <button id="copyImage">
+                    Копировать
+                </button>
+
+
+                <button id="copyImageURL">
+                    Копировать URL
+                </button>
+
+
+                <button id="openImage">
+                    Открыть
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- НАСТРОЙКИ -->
+
+    <div
+        id="settingsOverlay"
+        class="overlay"
+        style="display: none;"
+    >
+
+        <div class="settings-window">
+
+
+            <div class="settings-header">
+
+                <div>
+
+                    <div class="settings-title">
+                        Настройки
+                    </div>
+
+                    <div class="settings-subtitle">
+                        KB Browser
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="closeSettings"
+                    class="overlay-close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="settings-body">
+
+
+                <!-- РАЗДЕЛЫ -->
+
+                <div class="settings-menu">
+
+                    <button
+                        class="settings-menu-button active"
+                        data-section="generalSettings"
+                    >
+                        ⚙ Общие
+                    </button>
+
+
+                    <button
+                        class="settings-menu-button"
+                        data-section="historySettings"
+                    >
+                        🕘 История
+                    </button>
+
+
+                    <button
+                        class="settings-menu-button"
+                        data-section="downloadsSettings"
+                    >
+                        ↓ Загрузки
+                    </button>
+
+
+                    <button
+                        class="settings-menu-button"
+                        data-section="wallpaperSettings"
+                    >
+                        🖼 Обои
+                    </button>
+
+                </div>
+
+
+
+                <!-- ОБЩИЕ -->
+
+                <section
+                    id="generalSettings"
+                    class="settings-section active"
+                >
+
+                    <h2>
+                        Общие
+                    </h2>
+
+
+                    <div class="setting-card">
+
+                        <div>
+
+                            <div class="setting-name">
+                                KB Search
+                            </div>
+
+                            <div class="setting-description">
+                                Поиск через поисковую систему KB
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting-card">
+
+                        <div>
+
+                            <div class="setting-name">
+                                Новая вкладка
+                            </div>
+
+                            <div class="setting-description">
+                                Открывается домашняя страница KB
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ИСТОРИЯ -->
+
+                <section
+                    id="historySettings"
+                    class="settings-section"
+                >
+
+                    <div class="settings-section-top">
+
+                        <div>
+
+                            <h2>
+                                История
+                            </h2>
+
+                            <div class="setting-description">
+                                Посещённые страницы
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            id="clearHistory"
+                            class="danger-button"
+                        >
+                            Очистить историю
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="historyList"
+                        class="history-list"
+                    ></div>
+
+                </section>
+
+
+
+                <!-- ЗАГРУЗКИ -->
+
+                <section
+                    id="downloadsSettings"
+                    class="settings-section"
+                >
+
+                    <h2>
+                        Загрузки
+                    </h2>
+
+                    <div class="setting-description">
+                        Файлы, которые скачиваются через KB Browser
+                    </div>
+
+
+                    <div
+                        id="downloadsList"
+                        class="downloads-list"
+                    ></div>
+
+                </section>
+
+
+
+                <!-- ОБОИ -->
+
+                <section
+                    id="wallpaperSettings"
+                    class="settings-section"
+                >
+
+                    <h2>
+                        Обои
+                    </h2>
+
+                    <div class="setting-description">
+                        Выбери фон для главной страницы
+                    </div>
+
+
+                    <div class="wallpaper-options">
+
+
+                        <button
+                            class="wallpaper-option"
+                            data-wallpaper="default"
+                        >
+
+                            <span class="wallpaper-preview default-preview"></span>
+
+                            <span>
+                                Стандартные
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="wallpaper-option"
+                            data-wallpaper="dark"
+                        >
+
+                            <span class="wallpaper-preview dark-preview"></span>
+
+                            <span>
+                                Тёмные
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="wallpaper-option"
+                            data-wallpaper="blue"
+                        >
+
+                            <span class="wallpaper-preview blue-preview"></span>
+
+                            <span>
+                                Синие
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="wallpaper-option"
+                            data-wallpaper="purple"
+                        >
+
+                            <span class="wallpaper-preview purple-preview"></span>
+
+                            <span>
+                                Фиолетовые
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                    <div class="custom-wallpaper">
+
+                        <label
+                            for="wallpaperFile"
+                            class="custom-wallpaper-button"
+                        >
+                            Выбрать свою картинку
+                        </label>
+
+                        <input
+                            id="wallpaperFile"
+                            type="file"
+                            accept="image/*"
+                            hidden
+                        >
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="renderer.js"></script>
+
+</body>
+
+</html>
