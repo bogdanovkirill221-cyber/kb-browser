@@ -1,6 +1,6 @@
 {
   "name": "kb-browser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "KB Browser",
   "main": "main.js",
   "scripts": {
