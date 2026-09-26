@@ -8,6 +8,7 @@ const {
     clipboard,
     nativeImage
 } = require("electron");
+const { autoUpdater } = require('electron-updater');
 
 const path = require("path");
 const fs = require("fs");
@@ -1930,6 +1931,9 @@ function setupDownloads() {
 
 app.whenReady().then(
     () => {
+        if (app.isPackaged) {
+  autoUpdater.checkForUpdatesAndNotify();
+}
         loadHistory();
 
         setupDownloads();
